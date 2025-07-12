@@ -1,7 +1,7 @@
 {
   "about": {
     "name": "Shubham Singh",
-    "description": "Engineering student with a strong focus on Java (Spring Boot) and the MERN stack. I enjoy building scalable web apps, crafting secure REST APIs, and solving DSA problems on LeetCode. I've developed projects like PollGram, a social poll platform, and ClicknDrive, a real-time car rental system. I'm passionate about backend development, open-source contributions, and exploring system design and AI.",
+    "description": "I’m a passionate full-stack developer with practical experience in building secure, scalable, and high-performance web applications using Spring Boot and React. I specialize in implementing authentication, designing and consuming RESTful APIs, and crafting responsive, user-friendly interfaces. With a strong foundation in data structures and algorithms, I excel at solving complex problems efficiently. I'm constantly exploring new technologies, writing clean and maintainable code, and aiming to build impactful digital solutions that enhance user experiences and business processes. ",
     "profileImage": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1752314071/fl1xhxcltaqzvqyuntro.jpg",
     "pinnedSkills": [
       {
