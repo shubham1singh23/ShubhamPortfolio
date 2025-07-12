@@ -1,0 +1,85 @@
+.admin-education-section {
+  background: var(--card-bg, #181a1f);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.12);
+}
+.admin-education-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.admin-education-form input[type="text"],
+.admin-education-form input[type="checkbox"],
+.admin-education-form input[type="number"] {
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--primary-color, #3a8bfd);
+  background: #232526;
+  color: var(--text-main, #d3d6db);
+  font-size: 1rem;
+}
+.admin-education-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.admin-education-score-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.admin-education-score-row input {
+  flex: 1;
+}
+.admin-education-score-row button {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+}
+.admin-education-scores > button {
+  background: #3a8bfd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+  margin-top: 0.3rem;
+}
+.admin-education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.admin-education-item {
+  background: #232526;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 1px 6px 0 rgba(0,0,0,0.08);
+}
+.admin-education-item button {
+  margin-left: 0.7rem;
+  background: #3a8bfd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .admin-education-section {
+    padding: 1rem 0.2rem;
+  }
+  .admin-education-item {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+}

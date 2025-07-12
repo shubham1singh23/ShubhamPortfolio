@@ -1,0 +1,277 @@
+{
+  "about": {
+    "name": "Shubham Singh",
+    "description": "Engineering student with a strong focus on Java (Spring Boot) and the MERN stack. I enjoy building scalable web apps, crafting secure REST APIs, and solving DSA problems on LeetCode. I've developed projects like PollGram, a social poll platform, and ClicknDrive, a real-time car rental system. I'm passionate about backend development, open-source contributions, and exploring system design and AI.",
+    "profileImage": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1752314071/fl1xhxcltaqzvqyuntro.jpg",
+    "pinnedSkills": [
+      {
+        "name": "PostgreSql",
+        "icon": "faDatabase",
+        "category": "Databases"
+      },
+      {
+        "name": "Java",
+        "icon": "faJava",
+        "category": "Programming Languages"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "title": "POLLGRAM – SOCIAL POLL MEDIA PLATFORM ",
+      "description": "Engineered a robust and enterprise-ready backend for a social media platform focused on polls. Designed using MVC architecture and equipped with secure JWT-based authentication. Developed RESTful APIs for user registration, poll creation, and voting. The server is highly scalable, optimized for performance, and capable of handling large-scale user interactions efficiently from the  React frontend.",
+      "tech": [
+        "Spring Boot",
+        "Spring Security",
+        "JWT",
+        "JPA",
+        "PostgreSQL",
+        "MVC Architecture",
+        "React"
+      ],
+      "image": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1751799787/a4ls0hewcx1mcsk60dkl.png",
+      "github": "https://github.com/shubham1singh23/Pollgram",
+      "live": "",
+      "position": 0
+    },
+    {
+      "title": "Restaurant Management System",
+      "description": " Developed a desktop application to automate restaurant operations, featuring role-specific interfaces for    customers, chefs, and waiters. Implemented real-time order tracking and automated billing, enhancing  service efficiency and reducing manual errors. ",
+      "tech": [
+        "Java Swing",
+        "JDBC",
+        "MySQL"
+      ],
+      "image": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1751788194/g3sbreitdzb4ag4ij3ho.png",
+      "github": "https://github.com/shubham1singh23/Restaurant",
+      "live": "",
+      "position": 1
+    },
+    {
+      "title": "CLICKNDRIVE - Car Rental System",
+      "description": "Developed a web-based car rental application featuring real-time booking, AI-powered car suggestions via chatbot, and a dedicated driver interface for managing pick-up and drop-off tasks. Leveraged Firebase for seamless authentication and real-time database operations, enhancing user experience. ",
+      "tech": [
+        "React",
+        "Firebase",
+        "Cloudinary"
+      ],
+      "image": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1751788748/ozx3owmehhzclvza3jx9.jpg",
+      "github": "https://github.com/shubham1singh23/ClickandDrive",
+      "live": "https://clickndrivemnp.web.app/",
+      "position": 2
+    },
+    {
+      "title": "Plant-O-Pedia",
+      "description": "Plant-O-Pedia is an interactive web platform showcasing 3D models of various herbal plants along with their medicinal uses. It allows users to explore plant details visually in a realistic format, making it a great educational tool for both learners and researchers.",
+      "tech": [
+        "HTML",
+        "CSS",
+        "JAVASCRIPT",
+        "ThreeJs",
+        "Vercel"
+      ],
+      "image": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1752315040/bwl8bo1gvwbgpwvoioo5.png",
+      "github": "https://github.com/shubham1singh23/Plant-app",
+      "live": "https://innov-2025-team6.vercel.app/",
+      "position": 4
+    },
+    {
+      "title": "ResumeKraft",
+      "description": "A dynamic and responsive web app that lets users create, customize, and preview resumes in real time.\r\nFeatures include multiple themes, section-wise input forms, and instant resume generation on the same page.",
+      "tech": [
+        "HTML",
+        "CSS",
+        "JAVASCRIPT"
+      ],
+      "image": "https://res.cloudinary.com/dh9nlw5gq/image/upload/v1751797133/ufybvh5vjlj6kqszm6q0.png",
+      "github": "https://github.com/shubham1singh23/Resume",
+      "live": "https://shubham1singh23.github.io/Resume/",
+      "position": 3
+    }
+  ],
+  "skills": [
+    {
+      "name": "Java",
+      "icon": "faJava",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Python",
+      "icon": "faPython",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "PostgreSql",
+      "icon": "faDatabase",
+      "category": "Databases"
+    },
+    {
+      "name": "Github",
+      "icon": "faGithub",
+      "category": "Others"
+    },
+    {
+      "name": "Spring",
+      "icon": "faLeaf",
+      "category": "Frameworks"
+    },
+    {
+      "name": "React",
+      "icon": "faReact",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Spring Boot",
+      "icon": "faLeaf",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Spring MVC",
+      "icon": "faLeaf",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Spring Data Jpa",
+      "icon": "faLeaf",
+      "category": "Frameworks"
+    },
+    {
+      "name": "Nodejs",
+      "icon": "faNodeJs",
+      "category": "Frameworks"
+    },
+    {
+      "name": "MongoDb",
+      "icon": "faDatabase",
+      "category": "Databases"
+    },
+    {
+      "name": "MySQL",
+      "icon": "faDatabase",
+      "category": "Databases"
+    },
+    {
+      "name": "C",
+      "icon": "faC",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Javascript",
+      "icon": "faJs",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "HTML",
+      "icon": "faHtml5",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "CSS",
+      "icon": "faCss3",
+      "category": "Programming Languages"
+    },
+    {
+      "name": "Firebase",
+      "icon": "faDatabase",
+      "category": "Databases"
+    },
+    {
+      "name": "Git",
+      "icon": "faGit",
+      "category": "Others"
+    },
+    {
+      "name": "Intellij Idea",
+      "icon": "faCode",
+      "category": "Others"
+    },
+    {
+      "name": "AWS",
+      "icon": "faAws",
+      "category": "Others"
+    },
+    {
+      "name": "Postman Api",
+      "icon": "faServer",
+      "category": "Others"
+    },
+    {
+      "name": "Express",
+      "icon": "faNodeJs",
+      "category": "Frameworks"
+    },
+    {
+      "name": "JWT",
+      "icon": "faTools",
+      "category": "Others"
+    }
+  ],
+  "education": [
+    {
+      "courseName": "BE COMPUTER SCIENCE",
+      "collegeName": "Terna Engineering College",
+      "duration": "2023-2027",
+      "scores": [
+        {
+          "examTitle": "Upto Sem 3",
+          "score": "9.83"
+        }
+      ],
+      "isVisible": true
+    },
+    {
+      "courseName": "HSC ",
+      "collegeName": "Abhinav Jr College",
+      "duration": "2021-2023",
+      "scores": [
+        {
+          "examTitle": "Board Exam",
+          "score": "80 %"
+        },
+        {
+          "examTitle": "Jee",
+          "score": "88 percentile"
+        },
+        {
+          "examTitle": "Cet",
+          "score": "93 percentile"
+        }
+      ],
+      "isVisible": true
+    },
+    {
+      "courseName": "SSC",
+      "collegeName": "Sankara Vidyalaya",
+      "duration": "2011-2021",
+      "scores": [
+        {
+          "examTitle": "Board Exam",
+          "score": "90 %"
+        }
+      ],
+      "isVisible": true
+    }
+  ],
+  "certifications": [
+    {
+      "certificationName": " Java Spring Framework 6, Spring Boot 3, Spring AI Telusko",
+      "issuingOrganization": "Udemy",
+      "issueDate": "June 2025",
+      "expiryDate": "No expiry",
+      "credentialId": "",
+      "verificationLink": "https://www.udemy.com/certificate/UC-7c568182-b776-491a-b2d7-70a453526ffe/",
+      "description": "Master Java, Spring 6 and Spring Boot 3 , Spring JPA, Security, Spring AI, Docker and Microservices with Telusko",
+      "isVisible": true
+    },
+    {
+      "certificationName": "The Complete JavaScript Course 2025: From Zero to Expert!",
+      "issuingOrganization": "Udemy",
+      "issueDate": "March 2025",
+      "expiryDate": "No expiry",
+      "credentialId": "",
+      "verificationLink": "https://www.udemy.com/certificate/UC-27cc82db-0e57-4bb7-84d7-d7927ce2cdcd/",
+      "description": "The modern JavaScript course for everyone! Master JavaScript with projects, challenges and theory. Many courses in one!",
+      "isVisible": true
+    }
+  ]
+}

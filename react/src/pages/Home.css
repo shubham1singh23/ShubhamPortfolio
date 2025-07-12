@@ -1,0 +1,14 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: none;
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 0;
+  }
+}
