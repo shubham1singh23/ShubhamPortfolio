@@ -391,7 +391,7 @@
   
   .journey-desc,
   .journey-note {
-    color: #94a3b8;
+    color: #e0e7ef; /* Brighter for better contrast in dark mode */
   }
   
   .journey-stats > div {
@@ -429,7 +429,7 @@
 
 .dark-mode .journey-desc,
 .dark-mode .journey-note {
-  color: var(--text-main);
+  color: #e0e7ef; /* Brighter for custom dark mode toggle */
 }
 
 .dark-mode .journey-stats > div {

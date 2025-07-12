@@ -104,7 +104,11 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
+        <span className="navbar-logo"><p style={{ fontFamily: 'monospace', fontSize: '24px', color: 'white' }}>
+          Portfolio
+        </p>
 
+        </span>
         <button
           className="navbar-hamburger"
           onClick={handleToggle}

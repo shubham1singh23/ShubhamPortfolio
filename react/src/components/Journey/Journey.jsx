@@ -19,7 +19,10 @@ const Journey = () => {
     // LeetCode stats from third-party API
     fetch(`https://leetcode-api-faisalshohag.vercel.app/${LEETCODE_USER}`)
       .then(res => res.json())
-      .then(data => setLeetcode(data))
+      .then(data => {
+        setLeetcode(data)
+        console.log('LeetCode API response:', data)
+      })
       .catch(() => setLeetcode(null))
     // GitHub user
     fetch(`https://api.github.com/users/${GITHUB_USER}`)
@@ -63,7 +66,7 @@ const Journey = () => {
           <div className="journey-stats">
             <div><b>Problems Solved</b><br />{leetcode ? leetcode.totalSolved : '...'}</div>
             <div><b>Language</b><br />{leetcode ? leetcode.languageProblemCount?.[0]?.languageName || 'Java' : '...'}</div>
-            <div><b>Acceptance Rate</b><br />{leetcode ? leetcode.acceptanceRate + '%' : '...'}</div>
+            <div><b>Medium Solved</b><br />{leetcode && typeof leetcode.mediumSolved === 'number' ? leetcode.mediumSolved : '...'}</div>
           </div>
           <div className="journey-note">LeetCode Journey<br />Consistently solving problems and participating in contests to sharpen algorithmic thinking and problem-solving skills.</div>
           <a href={`https://leetcode.com/u/${LEETCODE_USER}/`} target="_blank" rel="noopener noreferrer" className="journey-link">View Full Profile</a>
