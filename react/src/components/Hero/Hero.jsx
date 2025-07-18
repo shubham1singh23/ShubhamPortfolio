@@ -231,7 +231,7 @@ const Hero = () => {
             </svg>
           </a>
           <a
-            href="https://linkedin.com/in/shubham1singh23"
+            href="https://www.linkedin.com/in/shubham-singh-9765b9287"
             target="_blank"
             rel="noopener noreferrer"
             className="social-link"
