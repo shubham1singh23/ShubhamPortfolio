@@ -1,11 +1,11 @@
 import './NotFound.css'
 
 const NotFound = () => (
-  <div className="notfound-container">
-    <h1>404</h1>
-    <p>Page Not Found</p>
-    <a href="/" className="btn-primary">Go Home</a>
-  </div>
+  <main className="notfound-container">
+    <h1 className="notfound-code mono">404</h1>
+    <p className="notfound-text">Page not found.</p>
+    <a href="/" className="notfound-link">&larr; Back home</a>
+  </main>
 )
 
 export default NotFound

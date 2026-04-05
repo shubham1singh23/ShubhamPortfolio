@@ -1,85 +1,78 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoon, faSun, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { Moon, SunMedium } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
 import './Navbar.css'
 
 const navLinks = [
   { href: '#about', label: 'About' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#education', label: 'Education' },
-  { href: '#certifications', label: 'Certifications' },
+  { href: '#work', label: 'Work' },
   { href: '#journey', label: 'Journey' },
   { href: '#contact', label: 'Contact' },
 ]
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
+const Navbar = ({ darkMode, toggleDarkMode, resumeUrl, showJourney }) => {
   const [open, setOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
+  const [activeSection, setActiveSection] = useState('#about')
   const [scrolled, setScrolled] = useState(false)
+  const visibleLinks = useMemo(
+    () => navLinks.filter(link => link.href !== '#journey' || showJourney),
+    [showJourney]
+  )
 
-  const handleToggle = () => setOpen(o => !o)
+  const handleToggle = () => setOpen(prev => !prev)
 
   const handleLinkClick = (e, href) => {
     e.preventDefault()
     setOpen(false)
 
-    // Smooth scroll to section
-    const targetId = href.substring(1) // Remove '#' from href
+    const targetId = href.substring(1)
     const targetElement = document.getElementById(targetId)
 
     if (targetElement) {
-      const navbar = document.querySelector('.navbar')
-      const navbarHeight = navbar ? navbar.offsetHeight : 0
-      const targetPosition = targetElement.offsetTop - navbarHeight - 20
-
       window.scrollTo({
-        top: targetPosition,
+        top: targetElement.offsetTop - 90,
         behavior: 'smooth'
       })
-
-      // Add a subtle animation effect
-      targetElement.style.transform = 'translateY(-10px)'
-      targetElement.style.transition = 'transform 0.3s ease'
-
-      setTimeout(() => {
-        targetElement.style.transform = 'translateY(0)'
-      }, 300)
     }
   }
 
-  // Handle scroll effects
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY
-      setScrolled(scrollTop > 50)
-
-      // Update active section based on scroll position
-      const sections = navLinks.map(link => link.href.substring(1))
-      const navbar = document.querySelector('.navbar')
-      const navbarHeight = navbar ? navbar.offsetHeight : 0
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i])
-        if (section) {
-          const sectionTop = section.offsetTop - navbarHeight - 100
-          if (scrollTop >= sectionTop) {
-            setActiveSection(`#${sections[i]}`)
-            break
-          }
-        }
-      }
+      setScrolled(window.scrollY > 40)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (open && !event.target.closest('.navbar-links') && !event.target.closest('.navbar-hamburger')) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`)
+          }
+        })
+      },
+      {
+        rootMargin: '-35% 0px -55% 0px',
+        threshold: 0.01
+      }
+    )
+
+    visibleLinks.forEach(link => {
+      const id = link.href.slice(1)
+      const section = document.getElementById(id)
+      if (section) {
+        observer.observe(section)
+      }
+    })
+
+    return () => observer.disconnect()
+  }, [visibleLinks])
+
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (open && !event.target.closest('.navbar-inner')) {
         setOpen(false)
       }
     }
@@ -88,56 +81,58 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     return () => document.removeEventListener('click', handleClickOutside)
   }, [open])
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-
+    document.body.style.overflow = open ? 'hidden' : ''
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = ''
     }
   }, [open])
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
-        <span className="navbar-logo"><p style={{ fontFamily: 'monospace', fontSize: '24px', color: 'white' }}>
-          Portfolio
-        </p>
-
-        </span>
-        <button
-          className="navbar-hamburger"
-          onClick={handleToggle}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <FontAwesomeIcon icon={open ? faTimes : faBars} />
-        </button>
-
-        <div className={`navbar-links${open ? ' open' : ''}`}>
-          {navLinks.map(link => (
-            <a
-              href={link.href}
-              key={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className={activeSection === link.href ? 'active' : ''}
-              aria-current={activeSection === link.href ? 'page' : undefined}
-            >
-              {link.label}
-            </a>
-          ))}
+    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+      <div className="container">
+        <div className="navbar-inner">
+          <a href="#top" className="navbar-logo" onClick={e => handleLinkClick(e, '#top')}>
+            Shubham Singh
+          </a>
 
           <button
-            className="theme-toggle"
-            onClick={toggleDarkMode}
-            aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            className="navbar-hamburger"
+            onClick={handleToggle}
+            aria-label="Toggle menu"
+            aria-expanded={open}
           >
-            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+            {open ? 'Close' : 'Menu'}
           </button>
+
+          <div className={`navbar-links ${open ? 'open' : ''}`}>
+            {visibleLinks.map(link => (
+              <a
+                href={link.href}
+                key={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className={activeSection === link.href ? 'active' : ''}
+                aria-current={activeSection === link.href ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+
+            <button
+              className="theme-toggle"
+              onClick={toggleDarkMode}
+              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {darkMode ? <SunMedium size={15} /> : <Moon size={15} />}
+              <span>{darkMode ? 'Light' : 'Dark'}</span>
+            </button>
+
+            {resumeUrl ? (
+              <a href={resumeUrl} className="resume-link" target="_blank" rel="noopener noreferrer">
+                Resume
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     </nav>

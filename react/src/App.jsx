@@ -1,32 +1,38 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
-import Navbar from './components/Navbar/Navbar'
+import { useEffect, useState } from 'react'
 import Home from './pages/Home'
 import Admin from './pages/Admin'
 import NotFound from './pages/NotFound'
-import Footer from './components/Footer/Footer'
 import './App.css'
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('portfolio-theme')
+    return saved === 'dark'
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light')
+    localStorage.setItem('portfolio-theme', darkMode ? 'dark' : 'light')
+  }, [darkMode])
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-    document.body.classList.toggle('dark-mode')
+    setDarkMode(prev => !prev)
   }
 
   return (
     <Router>
-      <div className={`app ${darkMode ? 'dark-mode' : ''}`}>
-        <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <main>
+      <div className="app">
+        <main className="app-main">
           <Routes>
-            <Route path="/" element={<Home darkMode={darkMode} />} />
+            <Route
+              path="/"
+              element={<Home darkMode={darkMode} toggleDarkMode={toggleDarkMode} />}
+            />
             <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <Footer />
       </div>
     </Router>
   )

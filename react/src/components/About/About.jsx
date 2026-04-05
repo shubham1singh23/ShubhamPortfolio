@@ -1,87 +1,81 @@
 import './About.css'
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import Skills from '../Skills/Skills'
 
-const fallbackAvatar = 'https://ui-avatars.com/api/?name=Profile&background=eee&color=555&size=128'
-
-const About = () => {
-  const [about, setAbout] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch('/data/portfolio.json')
-      .then(res => res.json())
-      .then(data => {
-        setAbout(data.about)
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error('Error loading portfolio.json:', err)
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) {
-    return (
-      <section id="about" className="about-section">
-        <div className="about-container">
-          <div className="about-skeleton">
-            <div className="skeleton-avatar"></div>
-            <div className="skeleton-content">
-              <div className="skeleton-line skeleton-title"></div>
-              <div className="skeleton-line"></div>
-              <div className="skeleton-line"></div>
-              <div className="skeleton-line skeleton-short"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
+const toLabel = category => {
+  const map = {
+    'Programming Languages': 'Languages',
+    Frameworks: 'Frameworks',
+    Databases: 'Databases',
+    Others: 'Tools'
   }
 
-  return about ? (
-    <motion.section
-      id="about"
-      className="about-section"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="about-container">
-        <motion.div
-          className="about-avatar-wrapper"
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <img
-            className="about-avatar"
-            src={about.profileImage || fallbackAvatar}
-            alt="Profile Avatar"
-            loading="lazy"
-          />
-          <div className="avatar-ring"></div>
-        </motion.div>
+  return map[category] || category
+}
 
-        <motion.div
-          className="about-content"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <h2 className="about-title">About Me</h2>
-          <p className="about-description">{about.description}</p>
-        </motion.div>
-      </div>
-    </motion.section>
-  ) : (
-    <section id="about" className="about-section">
-      <div className="about-container">
-        <div className="about-error">
-          <p>Unable to load about information</p>
+const About = ({ portfolio }) => {
+  const bio = portfolio?.about?.bio || ''
+  const paragraphs = bio
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+
+  const groupedSkills = portfolio?.skills || {}
+
+  return (
+    <section id="about" className="section about">
+      <div className="container">
+        <div className="section-shell about-shell">
+          <div className="about-shell-inner">
+            <div className="section-heading">
+              <div className="section-heading-copy">
+                <span className="mono muted">01 - About</span>
+                <h2 className="about-title-main">A bit about me</h2>
+                <p>I enjoy turning backend-heavy ideas into products that feel calm, fast, and easy to use.</p>
+              </div>
+              <div className="section-heading-note">
+                <strong>Approach</strong>
+                Thoughtful UX, clean APIs, and maintainable engineering decisions.
+              </div>
+            </div>
+
+            <div className="about-grid">
+              <div className="about-bio">
+                <div className="about-bio-intro">
+                  <span className="mono muted">Profile</span>
+                  <p className="about-bio-summary">
+                    Full-stack developer focused on secure systems, clean architecture, and responsive interfaces.
+                  </p>
+                </div>
+                {paragraphs.map((paragraph, index) => (
+                  <p key={`${paragraph.slice(0, 20)}-${index}`}>{paragraph}</p>
+                ))}
+              </div>
+
+              <div className="about-side">
+                <div className="about-skills-panel">
+                  <div className="about-panel-header">
+                    <span className="mono muted">Capabilities</span>
+                    <p>Core tools and technologies I use to design, build, and ship projects.</p>
+                  </div>
+
+                  <div className="about-skills-grid">
+                    {Object.entries(groupedSkills).map(([category, list]) => (
+                      <div className="skill-group" key={category}>
+                        <span className="mono" style={{ color: 'var(--text-muted)' }}>{toLabel(category)}</span>
+                        <div className="skill-list">
+                          {list.map(skill => (
+                            <span className="tag" key={`${category}-${skill}`}>{skill}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Skills portfolio={portfolio} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

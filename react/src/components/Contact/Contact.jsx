@@ -1,22 +1,19 @@
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import emailjs from '@emailjs/browser'
 import './Contact.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faUser, faCommentDots } from '@fortawesome/free-solid-svg-icons'
-import { motion } from 'framer-motion'
 
-const EMAILJS_SERVICE_ID = 'service_dzxr55s'
-const EMAILJS_TEMPLATE_ID = 'template_eztmfnf'
-const EMAILJS_PUBLIC_KEY = 'cl0qtOarXGwwNB_dO'
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
-const Contact = () => {
+const Contact = ({ portfolio }) => {
   const form = useRef()
   const [sent, setSent] = useState(false)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [showForm, setShowForm] = useState(false)
 
-  // Initialize EmailJS
   useEffect(() => {
     if (EMAILJS_PUBLIC_KEY) {
       emailjs.init(EMAILJS_PUBLIC_KEY)
@@ -30,64 +27,91 @@ const Contact = () => {
     setErrorMessage('')
     setLoading(true)
 
-    // Check if EmailJS is properly configured
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
       setError(true)
-      setErrorMessage('EmailJS is not properly configured. Please check your keys.')
+      setErrorMessage('Email form is not configured yet.')
       setLoading(false)
       return
     }
 
     emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
-      .then((result) => {
+      .then(() => {
         setSent(true)
         setLoading(false)
         form.current.reset()
       })
-      .catch((error) => {
+      .catch(() => {
         setError(true)
-        setErrorMessage('Failed to send message. Please try again or check your EmailJS configuration.')
+        setErrorMessage('Unable to send message. Please try direct email.')
         setLoading(false)
       })
   }
 
+  const availability = portfolio?.meta?.availability
+  const email = portfolio?.meta?.email
+  const social = portfolio?.social || []
+
   return (
-    <motion.section
-      id="contact"
-      className="contact-section"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8 }}
-    >
-      <h2>Contact</h2>
-      <form ref={form} onSubmit={sendEmail} className="contact-form">
-        <div className="input-group">
-          <FontAwesomeIcon icon={faUser} />
-          <input type="text" name="name" placeholder="Your Name" required />
+    <section id="contact" className="section contact">
+      <div className="container">
+        <div className="contact-inner">
+          <div className="contact-copy">
+            <span className="mono muted">05 - Contact</span>
+            <h2>Let&apos;s work together</h2>
+
+            <p className="contact-sub">
+              I&apos;m currently {availability ? availability.toLowerCase() : 'available for opportunities'}. My inbox is open
+              whether it&apos;s a job opportunity, a project, or just a hello.
+            </p>
+
+            {email ? (
+              <a href={`mailto:${email}`} className="email-link">{email}</a>
+            ) : null}
+
+            <div className="social-links">
+              {social.map(item => (
+                <a
+                  href={item.url}
+                  className="social-link"
+                  key={`${item.platform}-${item.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.platform}
+                </a>
+              ))}
+            </div>
+
+            <button className="form-toggle mono" onClick={() => setShowForm(prev => !prev)}>
+              {showForm ? 'Hide form' : 'Prefer a form?'}
+            </button>
+          </div>
+
+          <div className="contact-panel">
+            <p className="contact-panel-title mono">Send a note</p>
+            <p className="contact-panel-copy">Short messages, collaboration ideas, internship opportunities, or project discussions are all welcome.</p>
+
+            {showForm ? (
+              <form ref={form} onSubmit={sendEmail} className="contact-form-minimal">
+                <input type="text" name="name" placeholder="Your name" required />
+                <input type="email" name="email" placeholder="Your email" required />
+                <textarea name="message" placeholder="Your message" rows="5" required />
+                <button type="submit" disabled={loading}>
+                  {loading ? 'Sending...' : 'Send Message'}
+                </button>
+                {sent ? <p className="success-msg">Message sent successfully.</p> : null}
+                {error ? <p className="error-msg">{errorMessage}</p> : null}
+              </form>
+            ) : (
+              <div className="contact-panel-placeholder">
+                <span className="mono">Fastest route</span>
+                <p>Email me directly for the quickest response, or open the form if you prefer a structured message.</p>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="input-group">
-          <FontAwesomeIcon icon={faEnvelope} />
-          <input type="email" name="time" placeholder="Your Email" required />
-        </div>
-        <div className="input-group">
-          <FontAwesomeIcon icon={faCommentDots} />
-          <textarea name="message" placeholder="Your Message" rows="5" required />
-        </div>
-        <motion.button
-          type="submit"
-          className="btn-primary"
-          disabled={loading}
-          whileHover={{ scale: loading ? 1 : 1.06 }}
-          whileTap={{ scale: loading ? 1 : 0.97 }}
-          transition={{ type: 'spring', stiffness: 300 }}
-        >
-          {loading ? 'Sending...' : 'Send Message'}
-        </motion.button>
-        {sent && <p className="success-msg">Message sent successfully! I'll get back to you soon.</p>}
-        {error && <p className="error-msg">{errorMessage}</p>}
-      </form>
-    </motion.section>
+      </div>
+    </section>
   )
 }
 

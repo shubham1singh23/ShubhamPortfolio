@@ -1,14 +1,100 @@
 .home {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
   width: 100%;
   min-height: 100vh;
-  background: none;
+  position: relative;
+  overflow: clip;
+}
+
+.home-main {
+  opacity: 0;
+  transition: opacity 260ms ease;
+  position: relative;
+  z-index: 1;
+}
+
+.home-loaded .home-main {
+  opacity: 1;
+}
+
+.home::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(120, 140, 160, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 140, 160, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 20%, black, transparent 72%);
+  z-index: -1;
+}
+
+.home-ambient {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.home-ambient-one {
+  width: min(34vw, 380px);
+  height: min(34vw, 380px);
+  top: 92px;
+  right: -80px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 211, 160, 0.75), transparent 55%),
+    radial-gradient(circle at 70% 70%, rgba(76, 163, 137, 0.42), transparent 58%);
+}
+
+.home-ambient-two {
+  width: min(30vw, 320px);
+  height: min(30vw, 320px);
+  left: -90px;
+  top: 32%;
+  background: radial-gradient(circle at 50% 50%, rgba(89, 160, 219, 0.22), transparent 58%);
 }
 
 @media (max-width: 768px) {
   .home {
     padding: 0;
+  }
+
+  .home::before {
+    background-size: 32px 32px;
+  }
+
+  .home-ambient-one {
+    right: -120px;
+    top: 84px;
+  }
+
+  .home-ambient-two {
+    top: 44%;
+    left: -120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home::before {
+    background-size: 26px 26px;
+    mask-image: radial-gradient(circle at 50% 18%, black, transparent 76%);
+  }
+
+  .home-ambient-one {
+    width: 220px;
+    height: 220px;
+    top: 64px;
+    right: -120px;
+    opacity: 0.72;
+  }
+
+  .home-ambient-two {
+    width: 180px;
+    height: 180px;
+    left: -100px;
+    top: 48%;
+    opacity: 0.68;
   }
 }
